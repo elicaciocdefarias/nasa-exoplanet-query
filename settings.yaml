@@ -39,6 +39,7 @@ development:
   - django.contrib.sessions
   - django.contrib.messages
   - django.contrib.staticfiles
+  - search.apps.SearchConfig
   LANGUAGE_CODE: en-us
   LOAD_DOTENV: true
   MIDDLEWARE:
