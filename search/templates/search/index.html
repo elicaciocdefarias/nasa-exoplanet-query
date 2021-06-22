@@ -12,13 +12,18 @@
 <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="container d-flex w-100 h-100 mx-auto flex-column">
         <header class="mb-auto">
-            <h3 class="float-md-start mt-3">NEQ</h3>
+            <h3 class="float-md-start mt-3">
+                <a href="/" class="text-decoration-none text-white">
+                    NEQ
+                </a>
+            </h3>
         </header>
         <main class="px-3">
             <h1>Nasa Exoplanet Query</h1>
             <p class="lead">Find all informations about exoplanet easily and beautifully.</p>
             <p class="lead">
-                <a class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark" href="#">Get Started</a>
+                <a class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark" href="{% url 'list' %}">Get
+                    Started</a>
             </p>
         </main>
         <footer class="mt-auto text-white-50">
