@@ -1,15 +1,18 @@
-from django.views.generic import TemplateView, RedirectView
-from .models import Exoplanet
+from search.forms import ExoplanetUploadCSVFileForm
+from django.views.generic import TemplateView, FormView, ListView
+from search.models import Exoplanet
 
 
 class IndexView(TemplateView):
     template_name = "search/index.html"
 
 
-class UploadCSVOrListView(RedirectView):
-    permanent = True
+class ExoplanetListView(ListView):
+    template_name = "search/list.html"
+    model = Exoplanet
 
-    def get_redirect_url(self, *args, **kwargs):
-        exoplanet = Exoplanet.objects.all().first()
-        url = "upload/" if exoplanet is None else "list/"
-        return url
+
+class ExoplanetUploadView(FormView):
+    template_name = "search/upload_csv.html"
+    form_class = ExoplanetUploadCSVFileForm
+    success_url = "/list/"
