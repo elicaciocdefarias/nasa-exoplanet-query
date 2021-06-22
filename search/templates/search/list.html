@@ -1,0 +1,223 @@
+{% extends 'search/base.html' %}
+{% block title%}List{% endblock%}
+{% block content %}
+<div class="container d-flex w-100 h-100 mx-auto flex-column">
+    <header class="mb-auto">
+        <h3 class="float-md-start mt-3">
+            <a href="/" class="text-decoration-none text-white">
+                NEQ
+            </a>
+        </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a href="{% url 'upload' %}"
+                class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark mt-3">Upload data</a>
+        </nav>
+    </header>
+    <main class="px-3">
+        <div class="table-responsive">
+            <table id="table" class="table table-dark table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Planet Name</th>
+                        <th scope="col">Host Name</th>
+                        <th scope="col">Default Parameter Set</th>
+                        <th scope="col">Number of Stars</th>
+                        <th scope="col">Number of Planets</th>
+                        <th scope="col">Discovery Method</th>
+                        <th scope="col">Discovery Year</th>
+                        <th scope="col">Discovery Facility</th>
+                        <th scope="col">Solution Type</th>
+                        <th scope="col">Controversial Flag</th>
+                        <th scope="col">Planetary Parameter Reference</th>
+                        <th scope="col">Orbital Period [days]</th>
+                        <th scope="col">Orbital Period Upper Unc. [days]</th>
+                        <th scope="col">Orbital Period Lower Unc. [days]</th>
+                        <th scope="col">Orbital Period Limit Flag</th>
+                        <th scope="col">Orbit Semi-Major Axis [au])</th>
+                        <th scope="col">Orbit Semi-Major Axis Upper Unc. [au]</th>
+                        <th scope="col">Orbit Semi-Major Axis Lower Unc. [au]</th>
+                        <th scope="col">Orbit Semi-Major Axis Limit Flag</th>
+                        <th scope="col">Planet Radius [Earth Radius]</th>
+                        <th scope="col">Planet Radius Upper Unc. [Earth Radius]</th>
+                        <th scope="col">Planet Radius Lower Unc. [Earth Radius]</th>
+                        <th scope="col">Planet Radius Limit Flag</th>
+                        <th scope="col">Planet Radius [Jupiter Radius]</th>
+                        <th scope="col">Planet Radius Upper Unc. [Jupiter Radius]</th>
+                        <th scope="col">Planet Radius Lower Unc. [Jupiter Radius]</th>
+                        <th scope="col">Planet Radius Limit Flag</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Earth Mass]</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Earth Mass] Upper Unc.</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Earth Mass] Lower Unc.</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Earth Mass] Limit Flag</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Jupiter Mass]</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Jupiter Mass] Upper Unc.</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Jupiter Mass] Lower Unc.</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) [Jupiter Mass] Limit Flag</th>
+                        <th scope="col">Planet Mass or Mass*sin(i) Provenance</th>
+                        <th scope="col">Eccentricity</th>
+                        <th scope="col">Eccentricity Upper Unc.</th>
+                        <th scope="col">Eccentricity Lower Unc.</th>
+                        <th scope="col">Eccentricity Limit Flag</th>
+                        <th scope="col">Insolation Flux [Earth Flux]</th>
+                        <th scope="col">Insolation Flux Upper Unc. [Earth Flux]</th>
+                        <th scope="col">Insolation Flux Lower Unc. [Earth Flux]</th>
+                        <th scope="col">Insolation Flux Limit Flag</th>
+                        <th scope="col">Equilibrium Temperature [K]</th>
+                        <th scope="col">Equilibrium Temperature Upper Unc. [K]</th>
+                        <th scope="col">Equilibrium Temperature Lower Unc. [K]</th>
+                        <th scope="col">Equilibrium Temperature Limit Flag</th>
+                        <th scope="col">Data show Transit Timing Variations</th>
+                        <th scope="col">Stellar Parameter Reference</th>
+                        <th scope="col">Spectral Type</th>
+                        <th scope="col">Stellar Effective Temperature [K]</th>
+                        <th scope="col">Stellar Effective Temperature Upper Unc. [K]</th>
+                        <th scope="col">Stellar Effective Temperature Lower Unc. [K]</th>
+                        <th scope="col">Stellar Effective Temperature Limit Flag</th>
+                        <th scope="col">Stellar Radius [Solar Radius]</th>
+                        <th scope="col">Stellar Radius Upper Unc. [Solar Radius]</th>
+                        <th scope="col">Stellar Radius Lower Unc. [Solar Radius]</th>
+                        <th scope="col">Stellar Radius Limit Flag</th>
+                        <th scope="col">Stellar Mass [Solar mass]</th>
+                        <th scope="col">Stellar Mass Upper Unc. [Solar mass]</th>
+                        <th scope="col">Stellar Mass Lower Unc. [Solar mass]</th>
+                        <th scope="col">Stellar Mass Limit Flag</th>
+                        <th scope="col">Stellar Metallicity [dex]</th>
+                        <th scope="col">Stellar Metallicity Upper Unc. [dex]</th>
+                        <th scope="col">Stellar Metallicity Lower Unc. [dex]</th>
+                        <th scope="col">Stellar Metallicity Limit Flag</th>
+                        <th scope="col">Stellar Metallicity Ratio</th>
+                        <th scope="col">Stellar Surface Gravity [log10(cm/s**2)]</th>
+                        <th scope="col">Stellar Surface Gravity Upper Unc. [log10(cm/s**2)]</th>
+                        <th scope="col">Stellar Surface Gravity Lower Unc. [log10(cm/s**2)]</th>
+                        <th scope="col">Stellar Surface Gravity Limit Flag</th>
+                        <th scope="col">System Parameter Reference</th>
+                        <th scope="col">RA [sexagesimal]</th>
+                        <th scope="col">RA [deg]</th>
+                        <th scope="col">Dec [sexagesimal]</th>
+                        <th scope="col">Dec [deg]</th>
+                        <th scope="col">Distance [pc]</th>
+                        <th scope="col">Distance [pc] Upper Unc</th>
+                        <th scope="col">Distance [pc] Lower Unc</th>
+                        <th scope="col">V (Johnson) Magnitude</th>
+                        <th scope="col">V (Johnson) Magnitude Upper Unc</th>
+                        <th scope="col">V (Johnson) Magnitude Lower Unc</th>
+                        <th scope="col">Ks (2MASS) Magnitude</th>
+                        <th scope="col">Ks (2MASS) Magnitude Upper Unc</th>
+                        <th scope="col">Ks (2MASS) Magnitude Lower Unc</th>
+                        <th scope="col">Gaia Magnitude</th>
+                        <th scope="col">Gaia Magnitude Upper Unc</th>
+                        <th scope="col">Gaia Magnitude Lower Unc</th>
+                        <th scope="col">Date of Last Update</th>
+                        <th scope="col">Planetary Parameter Reference Publication Date</th>
+                        <th scope="col">Release Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj in object_list %}
+                    <tr>
+                        <td>{{ obj.pl_name }}</td>
+                        <td>{{ obj.hostname }}</td>
+                        <td>{{ obj.default_flag }}</td>
+                        <td>{{ obj.sy_snum }}</td>
+                        <td>{{ obj.sy_pnum }}</td>
+                        <td>{{ obj.discoverymethod }}</td>
+                        <td>{{ obj.disc_year }}</td>
+                        <td>{{ obj.disc_facility }}</td>
+                        <td>{{ obj.soltype }}</td>
+                        <td>{{ obj.pl_controv_flag }}</td>
+                        <td>{{ obj.pl_refname }}</td>
+                        <td>{{ obj.pl_orbper }}</td>
+                        <td>{{ obj.pl_orbpererr1 }}</td>
+                        <td>{{ obj.pl_orbpererr2 }}</td>
+                        <td>{{ obj.pl_orbperlim }}</td>
+                        <td>{{ obj.pl_orbsmax }}</td>
+                        <td>{{ obj.pl_orbsmaxerr1 }}</td>
+                        <td>{{ obj.pl_orbsmaxerr2 }}</td>
+                        <td>{{ obj.pl_orbsmaxlim }}</td>
+                        <td>{{ obj.pl_rade }}</td>
+                        <td>{{ obj.pl_radeerr1 }}</td>
+                        <td>{{ obj.pl_radeerr2 }}</td>
+                        <td>{{ obj.pl_radelim }}</td>
+                        <td>{{ obj.pl_radj }}</td>
+                        <td>{{ obj.pl_radjerr1 }}</td>
+                        <td>{{ obj.pl_radjerr2 }}</td>
+                        <td>{{ obj.pl_radjlim }}</td>
+                        <td>{{ obj.pl_bmasse }}</td>
+                        <td>{{ obj.pl_bmasseerr1 }}</td>
+                        <td>{{ obj.pl_bmasseerr2 }}</td>
+                        <td>{{ obj.pl_bmasselim }}</td>
+                        <td>{{ obj.pl_bmassj }}</td>
+                        <td>{{ obj.pl_bmassjerr1 }}</td>
+                        <td>{{ obj.pl_bmassjerr2 }}</td>
+                        <td>{{ obj.pl_bmassjlim }}</td>
+                        <td>{{ obj.pl_bmassprov }}</td>
+                        <td>{{ obj.pl_orbeccen }}</td>
+                        <td>{{ obj.pl_orbeccenerr1 }}</td>
+                        <td>{{ obj.pl_orbeccenerr2 }}</td>
+                        <td>{{ obj.pl_orbeccenlim }}</td>
+                        <td>{{ obj.pl_insol }}</td>
+                        <td>{{ obj.pl_insolerr1 }}</td>
+                        <td>{{ obj.pl_insolerr2 }}</td>
+                        <td>{{ obj.pl_insollim }}</td>
+                        <td>{{ obj.pl_eqt }}</td>
+                        <td>{{ obj.pl_eqterr1 }}</td>
+                        <td>{{ obj.pl_eqterr2 }}</td>
+                        <td>{{ obj.pl_eqtlim }}</td>
+                        <td>{{ obj.ttv_flag }}</td>
+                        <td>{{ obj.st_refname }}</td>
+                        <td>{{ obj.st_spectype }}</td>
+                        <td>{{ obj.st_teff }}</td>
+                        <td>{{ obj.st_tefferr1 }}</td>
+                        <td>{{ obj.st_tefferr2 }}</td>
+                        <td>{{ obj.st_tefflim }}</td>
+                        <td>{{ obj.st_rad }}</td>
+                        <td>{{ obj.st_raderr1 }}</td>
+                        <td>{{ obj.st_raderr2 }}</td>
+                        <td>{{ obj.st_radlim }}</td>
+                        <td>{{ obj.st_mass }}</td>
+                        <td>{{ obj.st_masserr1 }}</td>
+                        <td>{{ obj.st_masserr2 }}</td>
+                        <td>{{ obj.st_masslim }}</td>
+                        <td>{{ obj.st_met }}</td>
+                        <td>{{ obj.st_meterr1 }}</td>
+                        <td>{{ obj.st_meterr2 }}</td>
+                        <td>{{ obj.st_metlim }}</td>
+                        <td>{{ obj.st_metratio }}</td>
+                        <td>{{ obj.st_logg }}</td>
+                        <td>{{ obj.st_loggerr1 }}</td>
+                        <td>{{ obj.st_loggerr2 }}</td>
+                        <td>{{ obj.st_logglim }}</td>
+                        <td>{{ obj.sy_refname }}</td>
+                        <td>{{ obj.rastr }}</td>
+                        <td>{{ obj.ra }}</td>
+                        <td>{{ obj.decstr }}</td>
+                        <td>{{ obj.dec }}</td>
+                        <td>{{ obj.sy_dist }}</td>
+                        <td>{{ obj.sy_disterr1 }}</td>
+                        <td>{{ obj.sy_disterr2 }}</td>
+                        <td>{{ obj.sy_vmag }}</td>
+                        <td>{{ obj.sy_vmagerr1 }}</td>
+                        <td>{{ obj.sy_vmagerr2 }}</td>
+                        <td>{{ obj.sy_kmag }}</td>
+                        <td>{{ obj.sy_kmagerr1 }}</td>
+                        <td>{{ obj.sy_kmagerr2 }}</td>
+                        <td>{{ obj.sy_gaiamag }}</td>
+                        <td>{{ obj.sy_gaiamagerr1 }}</td>
+                        <td>{{ obj.sy_gaiamagerr2 }}</td>
+                        <td>{{ obj.rowupdate }}</td>
+                        <td>{{ obj.pl_pubdate }}</td>
+                        <td>{{ obj.releasedate }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="mt-auto text-white-50">
+        <p>
+            Proof of concept, by
+            <a href="https://github.com/elicaciocdefarias" class="text-white" target="_blank">elicaciocdefarias</a>
+        </p>
+    </footer>
+</div>
+{% endblock content %}

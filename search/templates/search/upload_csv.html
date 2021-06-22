@@ -1,0 +1,46 @@
+{% extends 'search/base.html' %}
+{% block title%}Upload{% endblock%}
+{% block head %}
+<style>
+    #form {
+        border: 3px dashed white;
+        border-radius: 6px;
+        height: 300px;
+        padding: 45px;
+    }
+</style>
+{% endblock head %}
+{% block content %}
+<div class="container d-flex w-100 h-100 mx-auto flex-column">
+    <header class="mb-auto">
+        <h3 class="float-md-start mt-3">
+            <a href="/" class="text-decoration-none text-white">
+                NEQ
+            </a>
+        </h3>
+    </header>
+    <main class="px-3">
+        <p class="lead">Load the csv file with the exoplanets informations.</p>
+        {{ form.non_field_errors}}
+        <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" id="form"
+            class="d-flex flex-column justify-content-around">
+            {% csrf_token %}
+            <div>
+                <input class="form-control form-control-lg" type="file" name="file">
+                {{ form.file.errors}}
+            </div>
+            <div>
+                <button class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark" type="submit">
+                    send
+                </button>
+            </div>
+        </form>
+    </main>
+    <footer class="mt-auto text-white-50">
+        <p>
+            Proof of concept, by
+            <a href="https://github.com/elicaciocdefarias" class="text-white" target="_blank">elicaciocdefarias</a>
+        </p>
+    </footer>
+</div>
+{% endblock content %}
