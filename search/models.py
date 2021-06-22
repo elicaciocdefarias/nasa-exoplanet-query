@@ -12,31 +12,31 @@ class Exoplanet(models.Model):
         null=True,
         blank=True,
     )
-    default_flag = models.CharField(
-        max_length=255,
+    #
+    default_flag = models.IntegerField(
         null=True,
         blank=True,
     )
-    sy_snum = models.CharField(
-        max_length=255,
+    sy_snum = models.IntegerField(
         null=True,
         blank=True,
     )
-    sy_pnum = models.CharField(
-        max_length=255,
+    sy_pnum = models.IntegerField(
         null=True,
         blank=True,
     )
+    #
     discoverymethod = models.CharField(
         max_length=255,
         null=True,
         blank=True,
     )
-    disc_year = models.CharField(
-        max_length=255,
+    #
+    disc_year = models.IntegerField(
         null=True,
         blank=True,
     )
+    #
     disc_facility = models.CharField(
         max_length=255,
         null=True,
@@ -47,206 +47,175 @@ class Exoplanet(models.Model):
         null=True,
         blank=True,
     )
-    pl_controv_flag = models.CharField(
-        max_length=255,
+    #
+    pl_controv_flag = models.IntegerField(
         null=True,
         blank=True,
     )
+    #
     pl_refname = models.CharField(
         max_length=255,
         null=True,
         blank=True,
     )
-    pl_orbper = models.CharField(
-        max_length=255,
+    #
+    pl_orbper = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbpererr1 = models.CharField(
-        max_length=255,
+    pl_orbpererr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbpererr2 = models.CharField(
-        max_length=255,
+    pl_orbpererr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbperlim = models.CharField(
-        max_length=255,
+    pl_orbperlim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbsmax = models.CharField(
-        max_length=255,
+    pl_orbsmax = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbsmaxerr1 = models.CharField(
-        max_length=255,
+    pl_orbsmaxerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbsmaxerr2 = models.CharField(
-        max_length=255,
+    pl_orbsmaxerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbsmaxlim = models.CharField(
-        max_length=255,
+    pl_orbsmaxlim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_rade = models.CharField(
-        max_length=255,
+    pl_rade = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radeerr1 = models.CharField(
-        max_length=255,
+    pl_radeerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radeerr2 = models.CharField(
-        max_length=255,
+    pl_radeerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radelim = models.CharField(
-        max_length=255,
+    pl_radelim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radj = models.CharField(
-        max_length=255,
+    pl_radj = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radjerr1 = models.CharField(
-        max_length=255,
+    pl_radjerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radjerr2 = models.CharField(
-        max_length=255,
+    pl_radjerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_radjlim = models.CharField(
-        max_length=255,
+    pl_radjlim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmasse = models.CharField(
-        max_length=255,
+    pl_bmasse = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmasseerr1 = models.CharField(
-        max_length=255,
+    pl_bmasseerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmasseerr2 = models.CharField(
-        max_length=255,
+    pl_bmasseerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmasselim = models.CharField(
-        max_length=255,
+    pl_bmasselim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmassj = models.CharField(
-        max_length=255,
+    pl_bmassj = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmassjerr1 = models.CharField(
-        max_length=255,
+    pl_bmassjerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmassjerr2 = models.CharField(
-        max_length=255,
+    pl_bmassjerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_bmassjlim = models.CharField(
-        max_length=255,
+    pl_bmassjlim = models.FloatField(
         null=True,
         blank=True,
     )
+    #
     pl_bmassprov = models.CharField(
         max_length=255,
         null=True,
         blank=True,
     )
-    pl_orbeccen = models.CharField(
-        max_length=255,
+    #
+    pl_orbeccen = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbeccenerr1 = models.CharField(
-        max_length=255,
+    pl_orbeccenerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbeccenerr2 = models.CharField(
-        max_length=255,
+    pl_orbeccenerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_orbeccenlim = models.CharField(
-        max_length=255,
+    pl_orbeccenlim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_insol = models.CharField(
-        max_length=255,
+    pl_insol = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_insolerr1 = models.CharField(
-        max_length=255,
+    pl_insolerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_insolerr2 = models.CharField(
-        max_length=255,
+    pl_insolerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_insollim = models.CharField(
-        max_length=255,
+    pl_insollim = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_eqt = models.CharField(
-        max_length=255,
+    pl_eqt = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_eqterr1 = models.CharField(
-        max_length=255,
+    pl_eqterr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_eqterr2 = models.CharField(
-        max_length=255,
+    pl_eqterr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    pl_eqtlim = models.CharField(
-        max_length=255,
+    pl_eqtlim = models.FloatField(
         null=True,
         blank=True,
     )
-    ttv_flag = models.CharField(
-        max_length=255,
+    #
+    ttv_flag = models.IntegerField(
         null=True,
         blank=True,
     )
+    #
     st_refname = models.CharField(
         max_length=255,
         null=True,
@@ -257,111 +226,98 @@ class Exoplanet(models.Model):
         null=True,
         blank=True,
     )
-    st_teff = models.CharField(
+    #
+    st_teff = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    st_tefferr1 = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    st_tefferr2 = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    st_tefflim = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    st_rad = models.FloatField(
         max_length=255,
         null=True,
         blank=True,
     )
-    st_tefferr1 = models.CharField(
+    st_raderr1 = models.FloatField(
         max_length=255,
         null=True,
         blank=True,
     )
-    st_tefferr2 = models.CharField(
+    st_raderr2 = models.FloatField(
         max_length=255,
         null=True,
         blank=True,
     )
-    st_tefflim = models.CharField(
-        max_length=255,
+    st_radlim = models.FloatField(
         null=True,
         blank=True,
     )
-    st_rad = models.CharField(
-        max_length=255,
+    st_mass = models.FloatField(
         null=True,
         blank=True,
     )
-    st_raderr1 = models.CharField(
-        max_length=255,
+    st_masserr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_raderr2 = models.CharField(
-        max_length=255,
+    st_masserr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_radlim = models.CharField(
-        max_length=255,
+    st_masslim = models.FloatField(
         null=True,
         blank=True,
     )
-    st_mass = models.CharField(
-        max_length=255,
+    st_met = models.FloatField(
         null=True,
         blank=True,
     )
-    st_masserr1 = models.CharField(
-        max_length=255,
+    st_meterr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_masserr2 = models.CharField(
-        max_length=255,
+    st_meterr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_masslim = models.CharField(
-        max_length=255,
+    st_metlim = models.FloatField(
         null=True,
         blank=True,
     )
-    st_met = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    st_meterr1 = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    st_meterr2 = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    st_metlim = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
+    #
     st_metratio = models.CharField(
         max_length=255,
         null=True,
         blank=True,
     )
-    st_logg = models.CharField(
-        max_length=255,
+    #
+    st_logg = models.FloatField(
         null=True,
         blank=True,
     )
-    st_loggerr1 = models.CharField(
-        max_length=255,
+    st_loggerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_loggerr2 = models.CharField(
-        max_length=255,
+    st_loggerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    st_logglim = models.CharField(
-        max_length=255,
+    st_logglim = models.FloatField(
         null=True,
         blank=True,
     )
+    #
     sy_refname = models.CharField(
         max_length=255,
         null=True,
@@ -372,81 +328,72 @@ class Exoplanet(models.Model):
         null=True,
         blank=True,
     )
-    ra = models.CharField(
-        max_length=255,
+    #
+    ra = models.FloatField(
         null=True,
         blank=True,
     )
+    #
     decstr = models.CharField(
         max_length=255,
         null=True,
         blank=True,
     )
-    dec = models.CharField(
-        max_length=255,
+    #
+    dec = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_dist = models.CharField(
-        max_length=255,
+    #
+    sy_dist = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_disterr1 = models.CharField(
-        max_length=255,
+    sy_disterr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_disterr2 = models.CharField(
-        max_length=255,
+    sy_disterr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_vmag = models.CharField(
-        max_length=255,
+    sy_vmag = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_vmagerr1 = models.CharField(
-        max_length=255,
+    sy_vmagerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_vmagerr2 = models.CharField(
-        max_length=255,
+    sy_vmagerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_kmag = models.CharField(
-        max_length=255,
+    sy_kmag = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_kmagerr1 = models.CharField(
-        max_length=255,
+    sy_kmagerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_kmagerr2 = models.CharField(
-        max_length=255,
+    sy_kmagerr2 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_gaiamag = models.CharField(
-        max_length=255,
+    sy_gaiamag = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_gaiamagerr1 = models.CharField(
-        max_length=255,
+    sy_gaiamagerr1 = models.FloatField(
         null=True,
         blank=True,
     )
-    sy_gaiamagerr2 = models.CharField(
-        max_length=255,
+    sy_gaiamagerr2 = models.FloatField(
         null=True,
         blank=True,
     )
+    #
     rowupdate = models.CharField(
         max_length=255,
         null=True,
