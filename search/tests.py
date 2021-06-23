@@ -1,9 +1,11 @@
 import pytest
-
+import inspect
 import csv
 import tempfile
+import search.handlers
+
 from search.models import Exoplanet
-from search.handlers import HandleFile
+from search.handlers import HandleFile, HandleRequestExoplanetArchive
 
 
 class TestIndexView:
@@ -123,3 +125,38 @@ class TestUploadView:
             handle_file.structure_is_valid()
             first_record = handle_file.records()[0]
             assert isinstance(first_record, dict)
+
+
+@pytest.fixture
+def querystring():
+    params = [
+        "log=TblView.ExoplanetArchive",
+        "workspace=2021.06.11_00.53.06_007798%2FTblView%2F2021.06.23_10.28.28_004066",
+        "table=/exodata/kvmexoweb/ExoTables/PS.tbl",
+        "pltxaxis=",
+        "pltyaxis=",
+        "checkbox=1",
+        "initialcheckedval=1",
+        "splitlabel=0",
+        "wsoverride=1",
+        "rowLabel=rowlabel",
+        "connector=true",
+        "dhx_no_header=1",
+        "posStart=112",
+        "count=250",
+        "dhxr1624469339369=1",
+    ]
+    querystring = "&".join(params)
+    return querystring
+
+
+class TestHandleRequestExoplanetArchive:
+    def test_should_exists(self):
+        members = [class_name for class_name, _ in inspect.getmembers(search.handlers)]
+        assert "HandleRequestExoplanetArchive" in members
+
+    def test_should_return_correct_querystring(self, querystring):
+        handle_request_exoplanet_archive = HandleRequestExoplanetArchive()
+        post_start = 112
+        query = handle_request_exoplanet_archive.query(post_start)
+        assert query == querystring
