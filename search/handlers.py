@@ -24,7 +24,6 @@ class HandleExoplanetArchive:
                 self.dataframe[column] = self.dataframe[column].fillna("")
             else:
                 self.dataframe[column] = self.dataframe[column].fillna(0)
-        # self.dataframe = self.dataframe.fillna("")
         return self
 
     def records(self):

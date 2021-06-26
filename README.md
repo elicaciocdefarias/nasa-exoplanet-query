@@ -11,18 +11,20 @@ Allown informations about exoplanets to be searched easily  and beautifully.
 
 ## How to use
 
-Clone the projeto.
+Clone the repository.
 ```
 git clone https://github.com/elicaciocdefarias/nasa-exoplanet-query.git
 ```
 
-Access project, 
+Access the project folder, 
 ```
-cd nasa-exoplanet-query
+cd nasa-exoplanet-query/
 ```
 
-open settings.yaml file and change value of the variables BASE_DIR and NAME.
-see that *parent_dir have be full path where your project to be localized.
+Open settings.yaml file and change the value of the variables BASE_DIR and NAME.
+> Notes:
+> The value of **parent_dir** must be the full path to the folder 
+> where the project was cloned.
 ```
 BASE_DIR: /<parent_dir>/nasa-exoplanet-query
 DATABASES:
@@ -31,35 +33,38 @@ DATABASES:
       NAME: /<parent_dir>/nasa-exoplanet-query/db.sqlite3
 ```
 
-In the root project create .secrets.yaml and add bellow code.
-
+In the root project, create a file called .secrets.yaml and add bellow code.
+> Notes:
+> don't forget to change the value of the variable.
 ```
 ---
 development:
   SECRET_KEY: <your-secret-key>
 ```
 
-Install dependencies
+Install the dependencies
 ```
 poetry install
 ```
 
-Running migratrions
+Run the migratrions.
 ```
 poetry run python manage.py migrate
 ```
 
-Running tests
+Run the  tests.
 ```
 poetry run pytest -vv
 ```
 
-Populate database
+Load the information into the database.
 ```
 poetry run python manage.py migrate
 ```
 
-Start app at development mode
+Start the application in development mode
 ```
 poetry run python manage.py run server
 ```
+
+Have fun!!!
