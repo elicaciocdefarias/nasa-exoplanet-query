@@ -1,11 +1,14 @@
 import pytest
 import inspect
-import csv
-import tempfile
 import search.handlers
-
+import numpy as np
+from pathlib import PurePosixPath
 from search.models import Exoplanet
-from search.handlers import HandleFile, HandleRequestExoplanetArchive
+from search.handlers import (
+    HandleExoplanetArchive,
+)
+
+from search.helpers import get_next_five_pages
 
 
 class TestIndexView:
@@ -26,7 +29,7 @@ def exoplanet(client):
 @pytest.fixture
 def object_list(client):
     response = client.get("/list/")
-    return response.context["object_list"]
+    return response.context["page_obj"]
 
 
 @pytest.mark.django_db
@@ -56,107 +59,101 @@ class TestListView:
         exoplanet,
         object_list,
     ):
-        assert object_list.first() == exoplanet
+        assert object_list[0] == exoplanet
 
     def test_should_return_queryset_with_1_exoplante_with_correct_name(
         self,
         exoplanet,
         object_list,
     ):
-        db_item = object_list.first()
+        db_item = object_list[0]
         assert db_item.pl_name == exoplanet.pl_name
 
 
 @pytest.fixture
-def tmp_file():
-    tmpfile = tempfile.NamedTemporaryFile(mode="w", delete=False)
-    lines_total = 98
-    columns = [0] * 92
-    with open(tmpfile.name, "w") as f:
-        writer = csv.writer(f)
-        for _ in range(lines_total):
-            writer.writerow(columns)
-    return tmpfile
-
-
-class TestUploadView:
-    def test_should_return_correct_status_code_when_url_accessed(self, client):
-        response = client.get("/upload/")
-        assert response.status_code == 200
-
-    def test_should_return_false_if_file_type_is_not_csv(
-        self,
-        tmp_file,
-    ):
-        with open(tmp_file.name, "rb") as f:
-            handleFile = HandleFile(f)
-            assert handleFile.is_type_csv() is False
-
-    def test_should_return_true_if_number_column_correct(
-        self,
-        tmp_file,
-    ):
-        with open(tmp_file.name, "rb") as f:
-            handle_file = HandleFile(f)
-            assert handle_file.structure_is_valid() is True
-
-    def test_should_return_instance_list(
-        self,
-        tmp_file,
-    ):
-        with open(tmp_file.name, "rb") as f:
-            handle_file = HandleFile(f)
-            assert isinstance(handle_file.records(), list)
-
-    def test_should_return_list_not_empty(
-        self,
-        tmp_file,
-    ):
-        with open(tmp_file.name, "rb") as f:
-            handle_file = HandleFile(f)
-            handle_file.is_type_csv()
-            handle_file.structure_is_valid()
-            assert len(handle_file.records()) != 0
-
-    def test_should_first_element_is_type_dict(self, tmp_file):
-        with open(tmp_file.name, "rb") as f:
-            handle_file = HandleFile(f)
-            handle_file.is_type_csv()
-            handle_file.structure_is_valid()
-            first_record = handle_file.records()[0]
-            assert isinstance(first_record, dict)
+def handle_exoplanet_archive():
+    handle_exoplanet_archive = HandleExoplanetArchive()
+    return handle_exoplanet_archive
 
 
 @pytest.fixture
-def querystring():
-    params = [
-        "log=TblView.ExoplanetArchive",
-        "workspace=2021.06.11_00.53.06_007798%2FTblView%2F2021.06.23_10.28.28_004066",
-        "table=/exodata/kvmexoweb/ExoTables/PS.tbl",
-        "pltxaxis=",
-        "pltyaxis=",
-        "checkbox=1",
-        "initialcheckedval=1",
-        "splitlabel=0",
-        "wsoverride=1",
-        "rowLabel=rowlabel",
-        "connector=true",
-        "dhx_no_header=1",
-        "posStart=112",
-        "count=250",
-        "dhxr1624469339369=1",
-    ]
-    querystring = "&".join(params)
-    return querystring
+def records(handle_exoplanet_archive):
+    records = handle_exoplanet_archive.read().normalize().records()
+    return records
 
 
-class TestHandleRequestExoplanetArchive:
+class TestHandleExoplanetArchive:
     def test_should_exists(self):
         members = [class_name for class_name, _ in inspect.getmembers(search.handlers)]
-        assert "HandleRequestExoplanetArchive" in members
+        assert "HandleExoplanetArchive" in members
 
-    def test_should_return_correct_querystring(self, querystring):
-        handle_request_exoplanet_archive = HandleRequestExoplanetArchive()
-        post_start = 112
-        query = handle_request_exoplanet_archive.query(post_start)
-        assert query == querystring
+    def test_should_have_file_property_type_pure_path(
+        self,
+        handle_exoplanet_archive,
+    ):
+        assert isinstance(handle_exoplanet_archive.file, PurePosixPath)
+
+    def test_should_have_property_dataframe_other_than_none(
+        self, handle_exoplanet_archive
+    ):
+        handle_exoplanet_archive.read()
+        assert handle_exoplanet_archive.dataframe is not None
+
+    def test_should_have_only_contains_correct_values(
+        self,
+        handle_exoplanet_archive,
+    ):
+        handle_exoplanet_archive.read().normalize()
+        values = handle_exoplanet_archive.dataframe.isna().values
+
+        result = list(set(np.all(values, axis=0)))
+        assert result[0] == False
+
+    def test_should_return_list(
+        self,
+        records,
+    ):
+
+        assert isinstance(records, list)
+
+    def test_should_return_not_empty_list(
+        self,
+        records,
+    ):
+        assert len(records) != 0
+
+    def test_should_contains_dicts_in_the_list(
+        self,
+        records,
+    ):
+        first_element = records[0]
+        assert isinstance(first_element, dict)
+
+
+class TestHelpersExoplanetListView:
+    def test_should_return_list_five_number_starting_current_page_number(self):
+        current_page = 3
+        last_page = 10
+        expected = [3, 4, 5, 6, 7]
+
+        next_five_pages = get_next_five_pages(current_page, last_page)
+
+        assert next_five_pages == expected
+
+    def test_should_return_list_four_number_starting_current_page_number(self):
+        current_page = 7
+        last_page = 10
+        expected = [7, 8, 9, 10]
+
+        next_five_pages = get_next_five_pages(current_page, last_page)
+
+        assert next_five_pages == expected
+
+    def test_should_return_list_three_number_starting_current_page_number(self):
+        current_page = 8
+        last_page = 10
+        expected = [8, 9, 10]
+
+        next_five_pages = get_next_five_pages(current_page, last_page)
+
+        assert next_five_pages == expected

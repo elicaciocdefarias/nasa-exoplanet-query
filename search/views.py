@@ -1,6 +1,5 @@
-from search.handlers import HandleFile
-from search.forms import ExoplanetUploadCSVFileForm
-from django.views.generic import TemplateView, FormView, ListView
+from search.helpers import get_next_five_pages
+from django.views.generic import TemplateView, ListView
 from search.models import Exoplanet
 
 
@@ -10,19 +9,19 @@ class IndexView(TemplateView):
 
 class ExoplanetListView(ListView):
     template_name = "search/list.html"
+    paginate_by = 5
     model = Exoplanet
 
+    def get_queryset(self):
+        return super().get_queryset().order_by("pk")
 
-class ExoplanetUploadView(FormView):
-    template_name = "search/upload_csv.html"
-    form_class = ExoplanetUploadCSVFileForm
-    success_url = "/list/"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_page = context["page_obj"].number
+        last_page = context["page_obj"].paginator.num_pages
+        context["next_fives_pages"] = get_next_five_pages(
+            current_page,
+            last_page,
+        )
 
-    def form_valid(self, form):
-        file = form.cleaned_data["file"]
-        handle_file = HandleFile(file)
-        if handle_file.is_type_csv() and handle_file.structure_is_valid():
-            for record in handle_file.records():
-                print(record)
-            return super().form_valid(form)
-        return super().form_invalid(form)
+        return context

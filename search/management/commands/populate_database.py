@@ -1,5 +1,6 @@
-from search.handlers import HandleRequestExoplanetArchive
+from search.handlers import HandleExoplanetArchive
 from django.core.management.base import BaseCommand
+from search.models import Exoplanet
 
 
 class Command(BaseCommand):
@@ -7,15 +8,8 @@ class Command(BaseCommand):
         ...
 
     def handle(self, *args, **kwargs):
-        request = HandleRequestExoplanetArchive()
+        exoplanet_archive = HandleExoplanetArchive()
+        records = exoplanet_archive.read().normalize().records()
 
-        start = 0
-        count = 100
-        amount = 29500
-        for _ in range(0, amount, count):
-            self.stdout.write(
-                self.style.SUCCESS(f"baixando de {start} até {(start+count)}...")
-            )
-            r = request.get(start)
-            start = start + count
-            self.stdout.write(self.style.SUCCESS(r.headers))
+        for kwargs in records:
+            Exoplanet.objects.update_or_create(**kwargs)
