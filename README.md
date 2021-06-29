@@ -57,6 +57,11 @@ Run the  tests.
 poetry run pytest -vv
 ```
 
+Build static files
+```
+cd search/static/search/bootstrap-5.0.2 & npm install & npm run dist
+```
+
 Load the information into the database.
 ```
 poetry run python manage.py migrate
