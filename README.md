@@ -59,12 +59,12 @@ poetry run pytest -vv
 
 Build static files
 ```
-cd search/static/search/bootstrap-5.0.2 & npm install & npm run dist
+poetry run python manage.py build_static_files
 ```
 
 Load the information into the database.
 ```
-poetry run python manage.py migrate
+poetry run python manage.py populate_database
 ```
 
 Start the application in development mode
